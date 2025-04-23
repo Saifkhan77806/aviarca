@@ -95,10 +95,6 @@ const managerData = {
         {
           title: "Bonus allocation",
           url: "/manager/bonus-allocation",
-        },
-        {
-          title: "Give bonus",
-          url: "/manager/give-bonus",
         }
       ],
     },
