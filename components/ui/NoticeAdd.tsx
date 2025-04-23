@@ -16,7 +16,7 @@ export function AddNotice() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Edit Profile</Button>
+        <Button variant="outline">Add Notice</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
@@ -53,7 +53,7 @@ export function AddNotice() {
         </Select>
         </div>
         <DialogFooter>
-          <Button type="submit">Save changes</Button>
+          <Button type="submit">Add notice</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

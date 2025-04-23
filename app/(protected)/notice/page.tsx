@@ -1,4 +1,4 @@
-import NoticeList from "@/comp/NoticeList"
+import NoticeList from "@/components/blocks/NoticeList"
 import { ChartAreaInteractive } from "@/components/chart-area-interactive"
 import { DataTable } from "@/components/data-table"
 import { SectionCards } from "@/components/section-cards"
@@ -46,7 +46,6 @@ const page = () => {
 
           <div>
             <NoticeList />
-            <Test name="SAIF" email="saifkhan" phone={56564312345} icon={<AlignRight />} />
           </div>
 
           
