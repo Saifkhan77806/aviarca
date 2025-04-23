@@ -1,6 +1,7 @@
 'use client';
 import * as React from "react"
 import { ChevronRight } from "lucide-react"
+import { useMemo } from "react";
 
 import { SearchForm } from "@/components/search-form"
 import { VersionSwitcher } from "@/components/version-switcher"
@@ -22,13 +23,12 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar"
 import { usePathname } from "next/navigation"
-import { useEffect } from "react";
 import Link from "next/link";
 
 // This is sample data.
 
 
-const data = {
+const defaultData = {
   versions: ["1.0.1", "1.1.0-alpha", "2.0.0-beta1"],
   navMain: [
     {
@@ -67,10 +67,48 @@ const data = {
         {
           title: "Create Emp",
           url: "/new-emp",
+        }
+      ],
+    },
+
+  ],
+}
+
+const managerData = {
+  versions: ["1.0.1", "1.1.0-alpha", "2.0.0-beta1"],
+  navMain: [
+    {
+      title: "Verify",
+      url: "#",
+      items: [
+        {
+          title: "Attendance",
+          url: "/verify-attendance",
+        }
+
+      ],
+    },
+    {
+      title: "Bonus",
+      url: "#",
+      items: [
+        {
+          title: "Bonus allocation",
+          url: "/bonus-allocation",
         },
         {
-          title: "Create Manager",
-          url: "/new-manager",
+          title: "Give bonus",
+          url: "/give-bonus",
+        }
+      ],
+    },
+    {
+      title: "Notice",
+      url: "#",
+      items: [
+        {
+          title: "Notice board",
+          url: "/notice",
         }
       ],
     },
@@ -81,6 +119,12 @@ const data = {
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
   const pathname = usePathname();
+
+  const data = useMemo(() => {
+    return pathname === "/manager" ? managerData : defaultData
+  }, [pathname])
+
+ 
 
 
 

@@ -1,8 +1,13 @@
 import React from 'react'
+import { Input } from '@/components/ui/input'
 
 const AttendanceSection = () => {
   return (
-    <div>AttendanceSection</div>
+    <div>
+        <div>
+            <Input placeholder='Search your employee' />
+        </div>
+    </div>
   )
 }
 
