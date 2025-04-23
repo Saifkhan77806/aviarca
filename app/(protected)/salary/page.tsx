@@ -1,8 +1,9 @@
+import SalaryContent from "@/components/section/SalaryContent"
 
 const page = () => {
   return (
     <div>
-      Salary
+      <SalaryContent />
     </div>
   )
 }
