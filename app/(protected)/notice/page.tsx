@@ -1,3 +1,4 @@
+import NoticeList from "@/comp/NoticeList"
 import { ChartAreaInteractive } from "@/components/chart-area-interactive"
 import { DataTable } from "@/components/data-table"
 import { SectionCards } from "@/components/section-cards"
@@ -6,17 +7,20 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { SidebarInset } from "@/components/ui/sidebar"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
+import {AddNotice} from '@/components/ui/NoticeAdd'
+import Test from "@/components/Test"
+import { AlignRight } from "lucide-react"
 
 const page = () => {
   return (
     <SidebarInset>
     <div className="flex flex-1 flex-col">
       <div className="@container/main flex flex-1 flex-col gap-2">
-        <div className="flex justify-between gap-4 py-4 md:gap-6 md:py-6">
-          <div>
+        <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
+          <div className="flex justify-between">
           <Select defaultValue="outline">
           <SelectTrigger
-            className="flex w-fit @4xl/main:hidden"
+            className="flex justify-between w-fit @4xl/main:hidden"
             size="sm"
             id="view-selector"
           >
@@ -35,6 +39,14 @@ const page = () => {
           <TabsTrigger value="focus-documents">Manager</TabsTrigger>
         </TabsList>
         </Tabs>
+
+        <AddNotice />
+     
+          </div>
+
+          <div>
+            <NoticeList />
+            <Test name="SAIF" email="saifkhan" phone={56564312345} icon={<AlignRight />} />
           </div>
 
           
