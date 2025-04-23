@@ -83,7 +83,7 @@ const managerData = {
       items: [
         {
           title: "Attendance",
-          url: "/verify-attendance",
+          url: "/manager/verify-attendance",
         }
 
       ],
@@ -94,11 +94,11 @@ const managerData = {
       items: [
         {
           title: "Bonus allocation",
-          url: "/bonus-allocation",
+          url: "/manager/bonus-allocation",
         },
         {
           title: "Give bonus",
-          url: "/give-bonus",
+          url: "/manager/give-bonus",
         }
       ],
     },
@@ -108,10 +108,57 @@ const managerData = {
       items: [
         {
           title: "Notice board",
-          url: "/notice",
+          url: "/manager/notice",
         }
       ],
     },
+    {
+      title: "Stocks",
+      url: "#",
+      items:[
+        {
+          title: "Add",
+          url: "/manager/add-stock",
+        },
+        {
+          title: "View",
+          url: "/manager/view-stock"
+        }
+      ]
+    },
+    {
+      title: "Reports",
+      url: "#",
+      items: [
+        {
+          title: "Attendance summary",
+          url: "/manager/attendance-report"
+        },
+        {
+          title: "Sales summary",
+          url: "/manager/sales-report"
+        },
+        {
+          title: "Inventory report",
+          url: "/manager/inventory-report"
+        }
+      ],
+    },
+    {
+      title: "Payment",
+      url: "#",
+      items: [
+        {
+          title: "Stocks payment",
+          url: "/manager/stock-payment"
+        },
+        {
+          title: "Employee payment",
+          url: "/manager/salary"
+        }
+      ]
+    }
+
 
   ],
 }
@@ -121,7 +168,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname();
 
   const data = useMemo(() => {
-    return pathname === "/manager" ? managerData : defaultData
+    return pathname.startsWith("/manager") ? managerData : defaultData
   }, [pathname])
 
  
