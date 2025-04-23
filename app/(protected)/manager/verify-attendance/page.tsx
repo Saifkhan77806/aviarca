@@ -10,19 +10,18 @@ const page = () => {
       </div>
 
         <div className='flex flex-col gap-2'>
-          <VerifyAttData name='saif' email='saifkhan@mfc.com' />
-          <VerifyAttData name='saif' email='saifkhan@mfc.com' />
-          <VerifyAttData name='saif' email='saifkhan@mfc.com' />
-          <VerifyAttData name='saif' email='saifkhan@mfc.com' />
-          <VerifyAttData name='saif' email='saifkhan@mfc.com' />
-          <VerifyAttData name='saif' email='saifkhan@mfc.com' />
-          <VerifyAttData name='saif' email='saifkhan@mfc.com' />
-          <VerifyAttData name='saif' email='saifkhan@mfc.com' />
-          <VerifyAttData name='saif' email='saifkhan@mfc.com' />
-          <VerifyAttData name='saif' email='saifkhan@mfc.com' />
-          <VerifyAttData name='saif' email='saifkhan@mfc.com' />
-          <VerifyAttData name='saif' email='saifkhan@mfc.com' />
-
+          <VerifyAttData name='saif' email='saifkhan@mfc.com' verify={true} />
+          <VerifyAttData name='saif' email='saifkhan@mfc.com' verify={true} />
+          <VerifyAttData name='saif' email='saifkhan@mfc.com' verify={true} />
+          <VerifyAttData name='saif' email='saifkhan@mfc.com' verify={true} />
+          <VerifyAttData name='saif' email='saifkhan@mfc.com' verify={true} />
+          <VerifyAttData name='saif' email='saifkhan@mfc.com' verify={true} />
+          <VerifyAttData name='saif' email='saifkhan@mfc.com' verify={true} />
+          <VerifyAttData name='saif' email='saifkhan@mfc.com' verify={true} />
+          <VerifyAttData name='saif' email='saifkhan@mfc.com' verify={true} />
+          <VerifyAttData name='saif' email='saifkhan@mfc.com' verify={true} />
+          <VerifyAttData name='saif' email='saifkhan@mfc.com' verify={true} />
+          <VerifyAttData name='saif' email='saifkhan@mfc.com' verify={true} />
         </div>
     </div>
   )

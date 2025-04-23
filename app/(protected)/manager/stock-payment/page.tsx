@@ -1,9 +1,13 @@
-import React from 'react'
+import SectionTitle from "@/components/blocks/headers/SectionTitle"
+import SalaryContent from "@/components/section/SalaryContent"
 
-const stockPayment = () => {
+const page = () => {
   return (
-    <div>stockPayment</div>
+    <div>
+      <SectionTitle title="Stock payment" description="manager can see stock repayment" />
+      <SalaryContent />
+    </div>
   )
 }
 
-export default stockPayment
+export default page

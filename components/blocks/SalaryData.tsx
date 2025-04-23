@@ -11,9 +11,9 @@ const SalaryData = ({name, email, position, salaryLeft, salaryPaid}: salaryProps
   return (
     <div className="border border-gray-400 rounded-md p-2 flex items-center gap-2">
         {/* profile image */}
-        <div className="w-20 h-20 bg-black rounded-full"></div>
+        <div className="w-10 h-10 bg-black rounded-full"></div>
 
-        <div>
+        <div className="text-xs">
             <p>{name}</p>
             <p>{email}</p>
             <p>{position}</p>

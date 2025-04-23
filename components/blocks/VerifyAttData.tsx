@@ -4,14 +4,17 @@ interface VerifyAttDataProps {
     name: string;
     email: string;
     profile?: string;
-    id?: string
+    id?: string;
+    verify?: boolean;
+    isProfile?: boolean
 
 }
 
-const VerifyAttData = ({name, email, profile, id}: VerifyAttDataProps) => {
+const VerifyAttData = ({name, email, profile, id, verify, isProfile}: VerifyAttDataProps) => {
     return (
-        <div className='border border-gray-400 rounded-md p-2 flex items-center gap-2'>
-            <div className='w-10 h-10 rounded-full bg-black'></div>
+        <div className='border border-gray-400 rounded-md p-2 flex items-center gap-2 cursor-pointer'>
+            {isProfile &&  <div className='w-10 h-10 rounded-full bg-black'></div>}
+           
 
             <div className="flex w-full justify-between items-center text-sm">
                 <div>
@@ -24,7 +27,9 @@ const VerifyAttData = ({name, email, profile, id}: VerifyAttDataProps) => {
                 </p>
                 </div>
 
-                <Button className="cursor-pointer">Verfiy</Button>
+                {
+                    verify && <Button className="cursor-pointer">Verfiy</Button>
+                }
             </div>
 
 
