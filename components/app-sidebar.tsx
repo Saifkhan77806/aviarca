@@ -159,12 +159,61 @@ const managerData = {
   ],
 }
 
+const empData = {
+  versions: ["1.0.1", "1.1.0-alpha", "2.0.0-beta1"],
+  navMain: [
+    {
+      title: "Attendance",
+      url: "#",
+      items: [
+        {
+          title: "Give attendance",
+          url: "/employee/give-attendance",
+        }
+
+      ],
+    },
+    {
+      title: "Notices",
+      url: "/employee/access-notice",
+      items: [
+        {
+          title: "Access notice",
+          url: "/employee/access-notice",
+        }
+      ],
+    },
+    {
+      title: "Salary & Bonuses",
+      url: "#",
+      items: [
+        {
+          title: "View salary",
+          url: "/employee/salary",
+        }
+      ],
+    },
+    {
+      title: "View bonus",
+      url: "#",
+      items:[
+        {
+          title: "Add",
+          url: "/employee/bonus",
+        }
+
+
+  ],
+
+}
+  ]}
+
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
   const pathname = usePathname();
 
   const data = useMemo(() => {
-    return pathname.startsWith("/manager") ? managerData : defaultData
+    return pathname.startsWith("/manager") ? managerData : pathname.startsWith("/employee") ? empData : defaultData;
   }, [pathname])
 
  
