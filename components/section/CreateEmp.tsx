@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import SectionTitle from "@/components/blocks/headers/SectionTitle"
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -59,10 +60,7 @@ export function CreateEmp() {
 
   return (
     <div>
-        <h1 className="text-3xl font-bold my-2">Employee or Manager Creation</h1>
-        <p className="text-gray-600 my-2">
-            Please fill out the form below to create a new employee.
-        </p>
+        <SectionTitle title="Employee or Manager Creation" description="Please fill out the form below to create a new employee." />
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
