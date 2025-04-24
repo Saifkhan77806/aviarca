@@ -1,6 +1,7 @@
 'use client';
 import * as React from "react"
 import { ChevronRight } from "lucide-react"
+import { useMemo } from "react";
 
 import { SearchForm } from "@/components/search-form"
 import { VersionSwitcher } from "@/components/version-switcher"
@@ -22,13 +23,12 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar"
 import { usePathname } from "next/navigation"
-import { useEffect } from "react";
 import Link from "next/link";
 
 // This is sample data.
 
 
-const data = {
+const defaultData = {
   versions: ["1.0.1", "1.1.0-alpha", "2.0.0-beta1"],
   navMain: [
     {
@@ -67,10 +67,6 @@ const data = {
         {
           title: "Create Emp",
           url: "/new-emp",
-        },
-        {
-          title: "Create Manager",
-          url: "/new-manager",
         }
       ],
     },
@@ -78,9 +74,149 @@ const data = {
   ],
 }
 
+const managerData = {
+  versions: ["1.0.1", "1.1.0-alpha", "2.0.0-beta1"],
+  navMain: [
+    {
+      title: "Verify",
+      url: "#",
+      items: [
+        {
+          title: "Attendance",
+          url: "/manager/verify-attendance",
+        }
+
+      ],
+    },
+    {
+      title: "Bonus",
+      url: "#",
+      items: [
+        {
+          title: "Bonus allocation",
+          url: "/manager/bonus-allocation",
+        }
+      ],
+    },
+    {
+      title: "Notice",
+      url: "#",
+      items: [
+        {
+          title: "Notice board",
+          url: "/manager/notice",
+        }
+      ],
+    },
+    {
+      title: "Stocks",
+      url: "#",
+      items:[
+        {
+          title: "Add",
+          url: "/manager/add-stock",
+        },
+        {
+          title: "View",
+          url: "/manager/view-stock"
+        }
+      ]
+    },
+    {
+      title: "Reports",
+      url: "#",
+      items: [
+        {
+          title: "Attendance summary",
+          url: "/manager/attendance-report"
+        },
+        {
+          title: "Sales summary",
+          url: "/manager/sales-report"
+        },
+        {
+          title: "Inventory report",
+          url: "/manager/inventory-report"
+        }
+      ],
+    },
+    {
+      title: "Payment",
+      url: "#",
+      items: [
+        {
+          title: "Stocks payment",
+          url: "/manager/stock-payment"
+        },
+        {
+          title: "Employee payment",
+          url: "/manager/salary"
+        }
+      ]
+    }
+
+
+  ],
+}
+
+const empData = {
+  versions: ["1.0.1", "1.1.0-alpha", "2.0.0-beta1"],
+  navMain: [
+    {
+      title: "Attendance",
+      url: "#",
+      items: [
+        {
+          title: "Give attendance",
+          url: "/employee/give-attendance",
+        }
+
+      ],
+    },
+    {
+      title: "Notices",
+      url: "/employee/access-notice",
+      items: [
+        {
+          title: "Access notice",
+          url: "/employee/access-notice",
+        }
+      ],
+    },
+    {
+      title: "Salary & Bonuses",
+      url: "#",
+      items: [
+        {
+          title: "View salary",
+          url: "/employee/salary",
+        }
+      ],
+    },
+    {
+      title: "View bonus",
+      url: "#",
+      items:[
+        {
+          title: "Add",
+          url: "/employee/bonus",
+        }
+
+
+  ],
+
+}
+  ]}
+
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
   const pathname = usePathname();
+
+  const data = useMemo(() => {
+    return pathname.startsWith("/manager") ? managerData : pathname.startsWith("/employee") ? empData : defaultData;
+  }, [pathname])
+
+ 
 
 
 
