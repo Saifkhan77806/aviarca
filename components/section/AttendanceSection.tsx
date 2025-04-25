@@ -7,6 +7,9 @@ const AttendanceSection = () => {
         <div>
             <Input placeholder='Search your employee' />
         </div>
+        <div>
+            
+        </div>
     </div>
   )
 }

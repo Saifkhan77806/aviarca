@@ -14,7 +14,10 @@ export const formSchema = z.object({
   address: z.string().min(10, {
     message: "Address must be at least 10 characters."
   })
+})
 
 
-
+export const loginSchema = z.object({
+  email: z.string().email({ message: "Invalid email address." }),
+  password: z.string().min(6, { message: "Password must be at least 6 characters." }),
 })
