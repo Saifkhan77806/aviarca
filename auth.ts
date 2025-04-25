@@ -22,15 +22,36 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
                 return false
         },
         async session({token, session} : any){
-            console.log("session", session, "token", token)
             session.user.id = token.id;
+            session.user.email = token.email
+            session.user.role = token.role
+            session.user.phone = token.phone
+            session.user.address = token.address
+            session.user.name = token.name
+            session.user.salary = token.salary + 100
+
             return session
         },
         async jwt({token, user}){
-            console.log("Jwt token", token)
-            if (user) {
-                token.id = user.id;
-              }
+
+            if(!token.sub) return token;
+
+            const existingUser = await getUserById(token.sub);
+
+            if(!existingUser) return token
+
+            if(user){
+
+                token.role = existingUser.position
+                token.email = existingUser.email
+                token.phone = existingUser.phone
+                token.name = existingUser.name
+                token.address = existingUser.address
+                token.salary = existingUser.salary
+
+            }    
+
+
             return token
         }
     },

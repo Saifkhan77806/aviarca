@@ -16,6 +16,7 @@ import { loginSchema } from "@/schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { login } from "@/app/actions/login";
+import Link from "next/link";
 
 export function LoginForm({
   className,
@@ -81,6 +82,7 @@ export function LoginForm({
                       <Input placeholder="*************" type="password" {...field} />
                     </FormControl>
                     <FormMessage />
+                    <Link href="/forgot-password">Forgot Password ?</Link>
                   </FormItem>
                 )}
               />

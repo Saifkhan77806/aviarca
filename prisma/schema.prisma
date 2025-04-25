@@ -41,7 +41,7 @@ model User {
   salary     Int?
   salaryPaid Int?
   attendance Attendance[]
-  createdAt DateTime @default(now())
+  createdAt  DateTime     @default(now())
 }
 
 model Attendance {
@@ -61,4 +61,12 @@ model Notice {
   role        Role     @default(MANAGER)
   forWho      UserRole @default(EMPLOYEE)
   createdAt   DateTime @default(now())
+}
+
+model ForgotPasswordToken {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  email     String
+  expiry    DateTime
+  createdAt DateTime @default(now())
 }
