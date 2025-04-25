@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import { z } from "zod"
+import { number, z } from "zod"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -17,25 +17,10 @@ import {
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import SectionTitle from "@/components/blocks/headers/SectionTitle"
-
-const formSchema = z.object({
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-  email: z.string().email({ message: "Invalid email address." }),
-  password: z.string().min(6, { message: "Password must be at least 6 characters." }),
-  phone: z.string().min(10, { message: "You must be at least 10 number." }),
-  position: z.enum(["EMPLOYEE", "MANAGER"], {
-    invalid_type_error: "Position must be either EMPLOYEE or MANAGER."
-  }),
-  salary: z.string().min(4, { message: "Salary must be at least 30,000." }),
-  address: z.string().min(10, {
-    message: "Address must be at least 10 characters."
-  })
+import { formSchema } from "@/schema"
+import { create } from "@/app/actions/create"
 
 
-
-})
 
 export function CreateEmp() {
     const form = useForm<z.infer<typeof formSchema>>({
@@ -46,7 +31,7 @@ export function CreateEmp() {
           password: "",
           phone: undefined,
           position: undefined,
-          salary: undefined,
+          salary: 1000,
           address: ""
 
         },
@@ -56,6 +41,12 @@ export function CreateEmp() {
         // Do something with the form values.
         // ✅ This will be type-safe and validated.
         console.log(values)
+
+        create(values).then((res)=>{
+          console.log(res)
+        }).catch((err)=>{
+          console.log("Something went wrong")
+        })
       }
 
   return (
@@ -72,9 +63,6 @@ export function CreateEmp() {
               <FormControl>
                 <Input placeholder="shadcn" {...field} />
               </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -89,9 +77,6 @@ export function CreateEmp() {
               <FormControl>
                 <Input placeholder="saifkhanfaisalsiddique@mfc.com" {...field} />
               </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -106,9 +91,6 @@ export function CreateEmp() {
               <FormControl>
                 <Input placeholder="*************" type="password" {...field} />
               </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -123,9 +105,6 @@ export function CreateEmp() {
               <FormControl>
                 <Input placeholder="Position" {...field} />
               </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -138,11 +117,8 @@ export function CreateEmp() {
             <FormItem>
               <FormLabel>Salary</FormLabel>
               <FormControl>
-                <Input placeholder="Salary" {...field} />
+                <Input placeholder="Salary" type="number" {...field}  onChange={(e) => field.onChange(e.target.valueAsNumber)} />
               </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -155,11 +131,8 @@ export function CreateEmp() {
             <FormItem>
               <FormLabel>Phone</FormLabel>
               <FormControl>
-                <Input placeholder="+91 1234567890"  {...field} />
+                <Input placeholder="1234567890" type="number"  {...field}  onChange={(e) => field.onChange(e.target.valueAsNumber)} />
               </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -174,9 +147,6 @@ export function CreateEmp() {
               <FormControl>
                 <Textarea placeholder="123, street City, State, ZIP Code, los angeles ,us"  {...field} />
               </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}

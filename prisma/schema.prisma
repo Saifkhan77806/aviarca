@@ -32,15 +32,16 @@ enum Role {
 
 model User {
   id         String       @id @default(cuid())
-  name       String
-  email      String
-  password   String
+  name       String?
+  email      String?
+  password   String?
   position   UserRole     @default(EMPLOYEE)
-  address    String
-  phone      String
-  salary     Int
-  salaryPaid Int
+  address    String?
+  phone      String?
+  salary     Int?
+  salaryPaid Int?
   attendance Attendance[]
+  createdAt DateTime @default(now())
 }
 
 model Attendance {
