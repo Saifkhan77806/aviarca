@@ -1,8 +1,12 @@
+import InvoiceBuilder from '@/components/AddStk'
 import React from 'react'
 
 const addStock = () => {
   return (
-    <div>addStock</div>
+    <div className='flex flex-col gap-2'>
+      <InvoiceBuilder />
+      
+    </div>
   )
 }
 
