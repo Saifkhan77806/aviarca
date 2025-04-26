@@ -1,11 +1,21 @@
-'use client';
+'use client'
 
 import React from 'react';
 import './styles/ShipNavigator.css'; // For custom keyframes
 import SectionTitle from '@/components/blocks/headers/SectionTitle';
 import { Button } from '@/components/ui/button';
+import { serverUser } from '@/lib/auth';
+import { giveAtt } from '@/app/actions/give-attendance';
 
 const GiveAttendance = () => {
+
+  
+
+  const Clicked = () =>{
+    console.log("Clicked")
+    giveAtt();
+  }
+
   return (
     <>
       <SectionTitle title='Employee attendance' description='Employee can give attendace ' />
@@ -24,7 +34,7 @@ const GiveAttendance = () => {
         </div>
       </div>
     </div>
-    <Button>give Attendance</Button>
+    <Button onClick={Clicked}>give Attendance</Button>
     </>
   )
 }
