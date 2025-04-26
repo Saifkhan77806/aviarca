@@ -70,3 +70,29 @@ model ForgotPasswordToken {
   expiry    DateTime
   createdAt DateTime @default(now())
 }
+
+
+model Bill {
+  id          String   @id @default(uuid())
+  partyName   String
+  address     String
+  billNo      String   @unique
+  items       Item[]
+  totalAmount Float
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Item {
+  id          String   @id @default(uuid())
+  quantity    Int
+  productName String
+  hsnCode     String
+  gst         Float
+  rate        Float
+  gstAmount   Float
+  total       Float
+  bill        Bill     @relation(fields: [billId], references: [id], onDelete: Cascade)
+  billId      String
+}
+

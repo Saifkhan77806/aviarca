@@ -30,3 +30,21 @@ export const forgotPasswordSchema = z.object({
 export const forgotPasswordEmailSChema = z.object({
   email: z.string().email({message: "Invalid email address"})
 })
+
+export const itemSchema = z.object({
+  quantity: z.string().regex(/^\d+$/, { message: 'Quantity must be a number string' }),
+  productName: z.string().min(1, { message: 'Product Name is required' }),
+  hsnCode: z.string().min(1, { message: 'HSN Code is required' }),
+  gst: z.string().regex(/^\d+(\.\d+)?$/, { message: 'GST must be a number string' }),
+  rate: z.string().regex(/^\d+(\.\d+)?$/, { message: 'Rate must be a number string' }),
+  gstAmount: z.number(),
+  total: z.number(),
+});
+
+export const billSchema = z.object({
+  partyName: z.string(),
+  address: z.string(),
+  billNo: z.string().min(1, { message: 'Bill No is required' }),
+  items: z.array(itemSchema).min(1, { message: 'At least one item is required' }),
+  totalAmount: z.number(),
+});

@@ -1,4 +1,5 @@
 'use client'
+import { saveBill } from '@/app/actions/add-invoice';
 import { useState, useRef, useMemo } from 'react';
 
 export default function InvoiceBuilder() {
@@ -101,7 +102,16 @@ export default function InvoiceBuilder() {
       items,
       totalAmount
     };
-    console.log(JSON.stringify(invoiceData, null, 2));
+    // console.log(JSON.stringify(invoiceData, null, 2));
+    if(invoiceData.partyName == "" || invoiceData.address== "" || invoiceData.billNo == "" ) alert("Please all the fields")
+    console.log(invoiceData);
+
+    saveBill(invoiceData).then((res)=>{
+      console.log(res)
+    }).catch((err)=>{
+      console.log(err)
+    })
+
   };
 
   return (
@@ -110,18 +120,21 @@ export default function InvoiceBuilder() {
         className="w-full border p-2 mb-2"
         placeholder="Party Name"
         value={partyName}
+        required
         onChange={(e) => setPartyName(e.target.value)}
       />
       <textarea
         className="w-full border p-2 mb-2"
         placeholder="Address"
         value={address}
+        required
         onChange={(e) => setAddress(e.target.value)}
       />
       <input
         className="w-full border p-2 mb-4"
         placeholder="Bill No."
         value={billNo}
+        required
         onChange={(e) => setBillNo(e.target.value)}
       />
 
