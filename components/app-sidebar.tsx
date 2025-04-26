@@ -109,7 +109,7 @@ const managerData = {
       ],
     },
     {
-      title: "Stocks",
+      title: "Raw material",
       url: "#",
       items:[
         {
@@ -118,7 +118,7 @@ const managerData = {
         },
         {
           title: "View",
-          url: "/manager/view-stock"
+          url: "/manager/view-rm-bill"
         }
       ]
     },
