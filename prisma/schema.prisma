@@ -71,7 +71,6 @@ model ForgotPasswordToken {
   createdAt DateTime @default(now())
 }
 
-
 model Bill {
   id          String   @id @default(uuid())
   partyName   String
@@ -84,7 +83,7 @@ model Bill {
 }
 
 model Item {
-  id          String   @id @default(uuid())
+  id          String @id @default(uuid())
   quantity    Int
   productName String
   hsnCode     String
@@ -92,7 +91,16 @@ model Item {
   rate        Float
   gstAmount   Float
   total       Float
-  bill        Bill     @relation(fields: [billId], references: [id], onDelete: Cascade)
+  bill        Bill   @relation(fields: [billId], references: [id], onDelete: Cascade)
   billId      String
 }
 
+model Stock {
+  id        String   @id @default(uuid())
+  name      String
+  mrp       Int
+  cost      Int
+  cage String
+  createdAt DateTime @default(now())
+  quantity  Int
+}

@@ -78,27 +78,6 @@ const managerData = {
   versions: ["1.0.1", "1.1.0-alpha", "2.0.0-beta1"],
   navMain: [
     {
-      title: "Verify",
-      url: "#",
-      items: [
-        {
-          title: "Attendance",
-          url: "/manager/verify-attendance",
-        }
-
-      ],
-    },
-    {
-      title: "Bonus",
-      url: "#",
-      items: [
-        {
-          title: "Bonus allocation",
-          url: "/manager/bonus-allocation",
-        }
-      ],
-    },
-    {
       title: "Notice",
       url: "#",
       items: [
@@ -109,12 +88,26 @@ const managerData = {
       ],
     },
     {
+      title: "Stocks",
+      url: "#",
+      items: [
+        {
+          title: "Add stock",
+          url: "/manager/add-stock",
+        },
+        {
+          title: "View stock",
+          url: "/manager/view-stock",
+        }
+      ],
+    },
+    {
       title: "Raw material",
       url: "#",
       items:[
         {
           title: "Add",
-          url: "/manager/add-stock",
+          url: "/manager/add-rm-bill",
         },
         {
           title: "View",

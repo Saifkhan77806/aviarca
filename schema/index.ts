@@ -48,3 +48,21 @@ export const billSchema = z.object({
   items: z.array(itemSchema).min(1, { message: 'At least one item is required' }),
   totalAmount: z.number(),
 });
+
+export const stockSchema = z.object({
+  name: z.string().min(1, {message: 'Name is required'}),
+  mrp: z.number().min(1, {message: 'Mrp is required'}),
+  cost: z.number().min(1, {message: 'Cost is required'}),
+  quantity: z.number()
+
+})
+
+export const stockSchemaWithImg = z.object({
+  name: z.string().min(1, {message: 'Name is required'}),
+  mrp: z.number().min(1, {message: 'Mrp is required'}),
+  cost: z.number().min(1, {message: 'Cost is required'}),
+  quantity: z.number(),
+  cage: z.string().min(3, {message: "Cage image url is required"})
+
+})
+
