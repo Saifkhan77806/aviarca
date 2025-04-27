@@ -63,6 +63,14 @@ export const stockSchemaWithImg = z.object({
   cost: z.number().min(1, {message: 'Cost is required'}),
   quantity: z.number(),
   cage: z.string().min(3, {message: "Cage image url is required"})
+})
 
+export const saleSchemaFrontend = z.object({
+  stockName: z.string().min(1,{message: "Stock name is required"}),
+  quantity: z.number().min(1,{message: "Sales quantity is required"})
+})
+
+export const saleSchema = z.object({
+  quantity: z.number().min(1,{message: "Sales quantity is required"})
 })
 

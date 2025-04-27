@@ -126,6 +126,8 @@ const chartData = [
   { date: "2024-06-30", desktop: 446 },
 ]
 
+
+
 const chartConfig = {
   visitors: {
     label: "Visitors",
