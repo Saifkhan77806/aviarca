@@ -12,5 +12,11 @@ export const getStockByName = async (name: string) =>{
     })
 
     return cage
-
 }
+
+export const getStocks = async () =>{
+
+    const cage =  await db.stock.findMany()
+ 
+     return cage
+ }

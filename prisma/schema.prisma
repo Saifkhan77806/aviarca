@@ -100,7 +100,7 @@ model Stock {
   name      String
   mrp       Int
   cost      Int
-  cage String
+  cage      String
   createdAt DateTime @default(now())
   quantity  Int
 }

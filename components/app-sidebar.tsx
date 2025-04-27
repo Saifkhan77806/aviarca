@@ -70,6 +70,16 @@ const defaultData = {
         }
       ],
     },
+    {
+      title: "Sales",
+      url: "#",
+      items: [
+        {
+          title: "Add & View sales",
+          url: "/sales"
+        },
+      ]
+    }
 
   ],
 }
@@ -145,6 +155,16 @@ const managerData = {
           title: "Employee payment",
           url: "/manager/salary"
         }
+      ]
+    },
+    {
+      title: "Sales",
+      url: "#",
+      items: [
+        {
+          title: "Add & View sales",
+          url: "/sales"
+        },
       ]
     }
 

@@ -18,20 +18,18 @@ export const giveAtt = async () =>{
 
     const data = await getAttendanceData(userData.id);
 
-    console.log(data)
 
 
+    await db.attendance.create({
+        data:{
+            userId: userData.id,
+            month,
+            year,
+            day,
+            status: "PRESENT"
+        }
+    })
 
-    // await db.attendance.create({
-    //     data:{
-    //         userId: userData.id,
-    //         month,
-    //         year,
-    //         day,
-    //         status: "PRESENT"
-    //     }
-    // })
-
-    // return {Success: "Attendance of today is addedd"}
+    return {Success: "Attendance of today is addedd"}
 
 }

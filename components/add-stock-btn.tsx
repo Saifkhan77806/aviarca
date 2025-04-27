@@ -25,8 +25,7 @@ export function AddStockBtn() {
             Make changes to your profile here. Click save when you're done.
           </DialogDescription>
         </DialogHeader>
-        <AddStockForm />
-        
+        <AddStockForm /> 
       </DialogContent>
     </Dialog>
   )
