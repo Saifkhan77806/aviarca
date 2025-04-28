@@ -51,10 +51,6 @@ const defaultData = {
           url: "/salary",
         },
         {
-          title: "order",
-          url: "/order",
-        },
-        {
           title: "Attendance",
           url: "/attendance",
         }
@@ -134,28 +130,10 @@ const managerData = {
           url: "/manager/attendance-report"
         },
         {
-          title: "Sales summary",
-          url: "/manager/sales-report"
-        },
-        {
           title: "Inventory report",
           url: "/manager/inventory-report"
         }
       ],
-    },
-    {
-      title: "Payment",
-      url: "#",
-      items: [
-        {
-          title: "Stocks payment",
-          url: "/manager/stock-payment"
-        },
-        {
-          title: "Employee payment",
-          url: "/manager/salary"
-        }
-      ]
     },
     {
       title: "Sales",
@@ -197,7 +175,7 @@ const empData = {
       ],
     },
     {
-      title: "Salary & Bonuses",
+      title: "Salary ",
       url: "#",
       items: [
         {
@@ -205,21 +183,11 @@ const empData = {
           url: "/employee/salary",
         }
       ],
-    },
-    {
-      title: "View bonus",
-      url: "#",
-      items:[
-        {
-          title: "Add",
-          url: "/employee/bonus",
-        }
-
-
-  ],
-
-}
+    }
   ]}
+
+
+  // In Employee navbar data you have to remove dash board and add notice
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
