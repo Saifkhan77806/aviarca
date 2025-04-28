@@ -18,11 +18,15 @@ export async function createSales(input: z.infer<typeof saleSchemaFrontend>) {
       throw new Error('Stock item not found!');
     }
 
+    const {cost, mrp} = stock
+
     // Step 3: Create the sales record
     const sale = await db.sales.create({
       data: {
         stockName: validatedData.stockName,
         quantity: validatedData.quantity,
+        cost,
+        mrp
       },
     });
 

@@ -114,16 +114,16 @@ model Stock {
   createdAt DateTime @default(now())
   quantity  Int
 
-  sales     Sales[]  @relation("StockSales") // optional, for reverse relation
+  sales Sales[] @relation("StockSales") // optional, for reverse relation
 }
 
 model Sales {
   id        String   @id @default(uuid())
-  stockName String   
+  stockName String
   quantity  Int
   createdAt DateTime @default(now())
+  cost      Int
+  mrp Int
 
-  stock     Stock    @relation("StockSales", fields: [stockName], references: [name])
+  stock Stock @relation("StockSales", fields: [stockName], references: [name])
 }
-
-

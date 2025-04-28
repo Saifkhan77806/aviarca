@@ -8,6 +8,7 @@ export const getSale = async () =>{
 
     const sale = await db.sales.findMany()
 
+
     return sale
 
 }
