@@ -20,11 +20,17 @@ export default {
 
             const {email, password} = validateData.data
 
+           
+
             const user = await getUserByEmail(email);
 
-            const passwordMatch = bcryptjs.compare(
-                password, user.password,
+           
+
+            const passwordMatch = await bcryptjs.compare(
+                password, user?.password,
             );
+
+           
 
             if(passwordMatch) return user;
 

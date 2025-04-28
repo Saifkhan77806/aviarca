@@ -47,10 +47,6 @@ const defaultData = {
       url: "#",
       items: [
         {
-          title: "Salary",
-          url: "/salary",
-        },
-        {
           title: "Attendance",
           url: "/attendance",
         }
@@ -81,7 +77,6 @@ const defaultData = {
 }
 
 const managerData = {
-  versions: ["1.0.1", "1.1.0-alpha", "2.0.0-beta1"],
   navMain: [
     {
       title: "Notice",
@@ -98,11 +93,7 @@ const managerData = {
       url: "#",
       items: [
         {
-          title: "Add stock",
-          url: "/manager/add-stock",
-        },
-        {
-          title: "View stock",
+          title: "Add & View stock",
           url: "/manager/view-stock",
         }
       ],
@@ -173,16 +164,6 @@ const empData = {
           url: "/employee/access-notice",
         }
       ],
-    },
-    {
-      title: "Salary ",
-      url: "#",
-      items: [
-        {
-          title: "View salary",
-          url: "/employee/salary",
-        }
-      ],
     }
   ]}
 
@@ -204,12 +185,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
   return (
     <Sidebar {...props}>
-      <SidebarHeader>
-        <VersionSwitcher
-          versions={data.versions}
-          defaultVersion={data.versions[0]}
-        />
-        <SearchForm />
+      <SidebarHeader className="flex items-center justify-center">
+       <div className="text-xl mt-2 tracking-[5px] font-bold text-shadow-2xs">M<span className="italic text-green-400">F</span>C</div>
+       <p className="text-sm -mt-2 italic">Metal Foldable Cages</p>
       </SidebarHeader>
       <SidebarContent className="gap-0">
       <SidebarGroupContent>

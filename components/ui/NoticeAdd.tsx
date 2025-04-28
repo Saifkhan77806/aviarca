@@ -19,10 +19,18 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { noticeSchema } from "@/schema"
+import { useState, useTransition } from "react"
+import { AlertBox } from "../blocks/Alert"
+import {BeatLoader} from 'react-spinners'
 
 export function AddNotice() {
 
-  const {mutate, isPending} = useAddNoticeData()
+  const {mutate, isPending: isLoading, data} = useAddNoticeData()
+  
+    const [isPending, startTransition] = useTransition()
+    const [success, setSuccess] = useState<string | undefined>("")
+    const [error, setError] = useState<string | undefined>("")
+  
 
   const form = useForm<z.infer<typeof noticeSchema>>({
     resolver: zodResolver(noticeSchema),
@@ -38,7 +46,21 @@ export function AddNotice() {
 
     console.log(values)
 
-    mutate(values)
+    startTransition(()=>{
+      mutate(values)
+
+      if(data?.success){
+        setSuccess(data?.success)
+      }
+
+      if(data?.error){
+        setError(data?.error)
+      }
+
+    })
+
+
+
 
   }
   
@@ -51,36 +73,9 @@ export function AddNotice() {
         <DialogHeader>
           <DialogTitle>Add Notice</DialogTitle>
           <DialogDescription>
-            ADD notice Page
+            Add notice Page
           </DialogDescription>
         </DialogHeader>
-        {/* <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="subject" className="text-right">
-              Subject
-            </Label>
-            <Input id="subject" name="subject" value={data.subject} placeholder="Subject"  className="border border-gray-400 col-span-3" />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="description" className="text-right">
-              Description
-            </Label>
-            <textarea name="description" value={data.description} placeholder="Description" className="border border-gray-400 col-span-3 rounded-md indent-1" cols={20}  id=""></textarea>
-          </div>
-          <Select defaultValue="Employee">
-          <SelectTrigger
-            className="flex justify-between w-fit"
-            size="sm"
-            id="view-selector"
-          >
-            <SelectValue placeholder="Select a view" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="employee">Employee</SelectItem>
-            <SelectItem value="manager">Manager</SelectItem>
-          </SelectContent>
-        </Select>
-        </div> */}
         <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
@@ -90,7 +85,7 @@ export function AddNotice() {
             <FormItem>
               <FormLabel>Subject</FormLabel>
               <FormControl>
-                <Input placeholder="Subject" {...field} />
+                <Input placeholder="Subject" disabled={isPending} {...field} />
               </FormControl>
               
               <FormMessage />
@@ -105,7 +100,7 @@ export function AddNotice() {
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
-                <Input placeholder="Description" {...field} />
+                <Input placeholder="Description" disabled={isPending} {...field} />
               </FormControl>
               
               <FormMessage />
@@ -118,8 +113,8 @@ export function AddNotice() {
           name="role"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <FormLabel>For Who</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value} disabled={isPending}>
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="Select a verified email to display" />
@@ -135,7 +130,10 @@ export function AddNotice() {
           )}
         />
 
-        <Button type="submit">Submit</Button>
+        <AlertBox type="default" text={success} />
+        <AlertBox text={error} />
+
+        <Button type="submit" disabled={isPending} >{isPending? <BeatLoader /> : "Submit"}</Button>
       </form>
     </Form>
       </DialogContent>

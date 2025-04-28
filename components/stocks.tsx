@@ -1,6 +1,7 @@
 import React from 'react'
 import StocksContainer from './stocks-container'
 import { useStockQuery } from '@/queries/useStockQuery'
+import { SkeletonDemo } from './blocks/Skeleton'
 
 const Stocks = () => {
     
@@ -14,6 +15,10 @@ const Stocks = () => {
   return (
     <div className='grid grid-cols-2 gap-2'>
         {
+            isPending ?
+            <>
+            <SkeletonDemo /> <SkeletonDemo /> 
+            </>  :
             data?.map((e)=>{
                 return(
 

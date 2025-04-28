@@ -10,21 +10,27 @@ export const updateStocks = async (values: z.infer<typeof stockSchemaWithImg>, i
 
     
     if(!validateData.success) return {error: "invalid fields"}
+
     
     const {name, quantity, mrp, cost, cage} = validateData.data
 
-    await db.stock.update({
-        where:{id},
-        data:{
-                name,
-                quantity,
-                mrp, 
-                cost, 
-                cage
-            }
-        })
+    try{
+        await db.stock.update({
+            where:{id},
+            data:{
+                    name,
+                    quantity,
+                    mrp, 
+                    cost, 
+                    cage
+                }
+            })
+            return {success: "Cage porduct is Updated !"}
+    }catch(err){
+        return {error: "Something went wrong !"}
+    }
+
     
-        return {success: "Cage porduct is Updated !"}
     
 
 }

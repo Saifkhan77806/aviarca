@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { useDeleteStock, useStockQuery } from '@/queries/useStockQuery'
 import { Trash2 } from 'lucide-react'
+import {HashLoader} from 'react-spinners'
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
 } from 'recharts'
@@ -19,7 +20,9 @@ const StockReport = () => {
   const [search, setSearch] = useState('')
   const [selectedStocksIds, setSelectedStocksIds] = useState<string[]>([])
 
-  if (isPending) return <div>Loading...</div>
+  if (isPending) return <div className='flex items-center justify-center h-full'>
+    <HashLoader />
+  </div>
 
   const filteredStocks = stocks.filter((stock: any) =>
     stock.name.toLowerCase().includes(search.toLowerCase())

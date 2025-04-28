@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input'
 import { getUserWithAtt } from '@/data/user'
 import { useQuery } from '@tanstack/react-query'
 import React, { useState, useMemo } from 'react'
+import {HashLoader} from 'react-spinners'
 
 const AttendanceReport = () => {
   const { data, isPending } = useQuery({
@@ -45,6 +46,10 @@ const AttendanceReport = () => {
       )
     })
   }, [data, search])
+
+  if (isPending) return <div className='flex items-center justify-center h-full'>
+    <HashLoader />
+  </div>
 
   return (
     <div>

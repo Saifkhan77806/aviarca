@@ -1,6 +1,9 @@
 'use client'
 import { saveBill } from '@/app/actions/add-invoice';
-import { useState, useRef, useMemo } from 'react';
+import { useState, useRef, useMemo, useTransition } from 'react';
+import { Button } from './ui/button';
+import { AlertBox } from './blocks/Alert';
+import {BeatLoader} from 'react-spinners'
 
 export default function InvoiceBuilder() {
   const [partyName, setPartyName] = useState('');
@@ -8,6 +11,10 @@ export default function InvoiceBuilder() {
   const [billNo, setBillNo] = useState('');
   const [items, setItems] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [isPending, startTransition] = useTransition()
+  const [success, setSuccess] = useState<string | undefined>("")
+  const [error, setError] = useState<string | undefined>("")
+
 
   const [formData, setFormData] = useState({
     quantity: '',
@@ -103,14 +110,28 @@ export default function InvoiceBuilder() {
       totalAmount
     };
     // console.log(JSON.stringify(invoiceData, null, 2));
-    if(invoiceData.partyName == "" || invoiceData.address== "" || invoiceData.billNo == "" ) alert("Please all the fields")
+    if (invoiceData.partyName == "" || invoiceData.address == "" || invoiceData.billNo == "") alert("Please all the fields")
     console.log(invoiceData);
 
-    saveBill(invoiceData).then((res)=>{
-      console.log(res)
-    }).catch((err)=>{
-      console.log(err)
+    startTransition(() => {
+      saveBill(invoiceData).then((res) => {
+
+        if (res?.error) {
+          setError(res?.error)
+        }
+
+        if (res?.success) {
+          setSuccess(res?.success)
+        }
+
+        console.log(res)
+      }).catch((err) => {
+        console.log(err)
+      })
+
+
     })
+
 
   };
 
@@ -195,16 +216,20 @@ export default function InvoiceBuilder() {
             onKeyDown={(e) => handleKeyDown(e, index)}
           />
         ))}
-        <button className="border p-2 bg-blue-500 text-white" onClick={selectedIndex !== null ? updateItem : addItem}>
+        <Button className="border p-2  text-white" onClick={selectedIndex !== null ? updateItem : addItem}>
           {selectedIndex !== null ? 'Update' : 'Add'}
-        </button>
+        </Button>
       </div>
 
       <div className="text-right font-bold text-lg mb-4">Total: ₹{totalAmount.toFixed(2)}</div>
 
-      <button className="border p-2 bg-green-600 text-white w-full" onClick={handleSubmit}>
-        Submit
-      </button>
+      <AlertBox text={error} />
+      <AlertBox type="default" text={success} />
+
+
+      <Button disabled={isPending} className="border p-2  text-white w-full" onClick={handleSubmit}>
+        {isPending?<BeatLoader className="text-black" />: "Create Bill"}
+      </Button>
     </div>
   );
 }

@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input'
 import { getUserWithAtt } from '@/data/user'
 import { useQuery } from '@tanstack/react-query'
 import React, { useState, useMemo } from 'react'
+import { SkeletonDemo } from '../blocks/Skeleton'
 
 const AttendanceSection = () => {
   const { data, isPending } = useQuery({
@@ -63,9 +64,9 @@ const AttendanceSection = () => {
 
           <div className="flex max-sm:flex-col gap-2">
             {/* List */}
-            <div className="w-1/2 max-sm:w-full flex flex-col gap-2 bg-muted p-2 rounded-md">
+            <div className="w-1/2 max-sm:w-full flex flex-col gap-2  p-2 rounded-md">
               {isPending ? (
-                <p>Loading ...</p>
+                <SkeletonDemo />
               ) : (
                 filteredData.map((el, key) => {
                   const isSelected = selectedUserId === el.id

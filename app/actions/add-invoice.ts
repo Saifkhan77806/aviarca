@@ -34,12 +34,12 @@ export async function saveBill(rawData: unknown) {
       },
     });
 
-    return { success: true, data: newBill };
+    return { success: "Bill is created" };
   } catch (error) {
     console.error('Error saving bill:', error);
     if (error instanceof z.ZodError) {
-      return { success: false, error: error.errors.map(e => e.message).join(', ') };
+      return { success: "something went worng", error: error.errors.map(e => e.message).join(', ') };
     }
-    return { success: false, error: (error as Error).message };
+    return { success: "something went wrong", error: (error as Error).message };
   }
 }

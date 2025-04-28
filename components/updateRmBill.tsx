@@ -6,6 +6,7 @@ import { useState, useEffect, useRef, useMemo } from 'react';
 // import { useRouter } from 'next/navigation';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { db } from '@/lib/db';
+import { Button } from '@/components/ui/button';
 
 export default function UpdateRawMaterialBill({ initialBill }: { initialBill: any }) {
 //   const router = useRouter();
@@ -132,18 +133,21 @@ export default function UpdateRawMaterialBill({ initialBill }: { initialBill: an
         className="w-full border p-2 mb-2"
         placeholder="Party Name"
         value={partyName}
+        disabled={updateMutation.isPending}
         onChange={(e) => setPartyName(e.target.value)}
       />
       <textarea
         className="w-full border p-2 mb-2"
         placeholder="Address"
         value={address}
+        disabled={updateMutation.isPending}
         onChange={(e) => setAddress(e.target.value)}
       />
       <input
         className="w-full border p-2 mb-4"
         placeholder="Bill No."
         value={billNo}
+        disabled={updateMutation.isPending}
         onChange={(e) => setBillNo(e.target.value)}
       />
 
@@ -194,6 +198,7 @@ export default function UpdateRawMaterialBill({ initialBill }: { initialBill: an
             ref={(el) => (inputRefs.current[index] = el)}
             type={field === 'productName' ? 'text' : 'number'}
             name={field}
+            disabled={updateMutation.isPending}
             placeholder={field[0].toUpperCase() + field.slice(1)}
             className="border p-2"
             value={(formData as any)[field]}
@@ -201,19 +206,19 @@ export default function UpdateRawMaterialBill({ initialBill }: { initialBill: an
             onKeyDown={(e) => handleKeyDown(e, index)}
           />
         ))}
-        <button
-          className="border p-2 bg-blue-500 text-white"
+        <Button
+          className="border p-2 text-white"
           onClick={selectedIndex !== null ? updateItem : addItem}
         >
           {selectedIndex !== null ? 'Update' : 'Add'}
-        </button>
+        </Button>
       </div>
 
       <div className="text-right font-bold text-lg mb-4">Total: ₹{totalAmount.toFixed(2)}</div>
 
-      <button className="border p-2 bg-green-600 text-white w-full" onClick={handleSubmit}>
+      <Button className="border p-2  text-white w-full" onClick={handleSubmit}>
         Update
-      </button>
+      </Button>
     </div>
   );
 }

@@ -17,11 +17,18 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { login } from "@/app/actions/login";
 import Link from "next/link";
+import { useState, useTransition } from "react";
+import {BeatLoader} from "react-spinners"
+import { AlertBox } from "./blocks/Alert";
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+
+  const [isPending, startTransition] = useTransition()
+  const [success, setSuccess] = useState<string | undefined>("")
+  const [error, setError] = useState<string | undefined>("")
 
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
@@ -36,11 +43,27 @@ export function LoginForm({
     // ✅ This will be type-safe and validated.
     console.log(values)
 
-    login(values).then((res)=>{
-      console.log(res)
-    }).catch((err)=>{
-      console.log("login error", err)
+    startTransition(()=>{
+      login(values).then((res)=>{
+
+        if(res?.error){
+          setError(res?.error)
+        }
+
+        if(res?.success){
+          setSuccess(res?.success)
+        }
+
+        console.log(res)
+      }).catch((err)=>{
+        console.log("login error", err)
+      })
     })
+
+
+
+
+
 
 
   }
@@ -65,7 +88,7 @@ export function LoginForm({
                   <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input placeholder="saifkhanfaisalsiddique@mfc.com" {...field} />
+                      <Input placeholder="saifkhanfaisalsiddique@mfc.com" disabled={isPending} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -79,7 +102,7 @@ export function LoginForm({
                   <FormItem>
                     <FormLabel>Password</FormLabel>
                     <FormControl>
-                      <Input placeholder="*************" type="password" {...field} />
+                      <Input placeholder="*************" disabled={isPending} type="password" {...field} />
                     </FormControl>
                     <FormMessage />
                     <Link href="/forgot-password">Forgot Password ?</Link>
@@ -87,7 +110,10 @@ export function LoginForm({
                 )}
               />
 
-              <Button className="w-full" type="submit">Submit</Button>
+              <AlertBox  text={error} />
+              <AlertBox type="default" text={success} />
+
+              <Button className="w-full cursor-pointer" disabled={isPending} type="submit">{isPending?<BeatLoader className="text-black" />: "Login"}</Button>
             </form>
           </Form>
         </CardContent>

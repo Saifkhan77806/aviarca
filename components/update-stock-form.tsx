@@ -29,9 +29,9 @@ const UpdateFormStock = ({ name, cage, mrp, cost, quantity, id }: updateStockPro
 
   const updateStockMutation = useMutation({
     mutationFn: (values: any) => updateStocks(values, id),
-    onSuccess: () => {
+    onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ['stocks'] });
-      alert("Stock updated successfully")
+      return data
     },
 
   })

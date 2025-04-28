@@ -22,6 +22,7 @@ export const useAddNoticeData = () =>{
         onSuccess: (data) =>{
             console.log(data)
             queryClient.invalidateQueries({queryKey: ["notice"]})
+            return data
         }
     })
   

@@ -10,6 +10,7 @@ import { useState } from 'react'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 import { Trash2 } from 'lucide-react'
 import { deleteSale } from '@/data/sale'
+import { SkeletonDemo } from '@/components/blocks/Skeleton'
 
 const AttendanceReport = () => {
   const { data: sales = [], isPending } = useSaleQuery()
@@ -69,40 +70,43 @@ const AttendanceReport = () => {
 
           <div className="flex max-sm:flex-col gap-2">
             {/* List */}
-            <div className="w-1/2 max-sm:w-full flex flex-col gap-2 bg-muted p-2 rounded-md max-h-[400px] overflow-y-auto">
-              
-                {filteredSales.map((sale) => (
-                  <div
-                    key={sale.id}
-                    className={`flex items-center justify-between p-2 rounded-md cursor-pointer ${
-                      selectedSalesIds.includes(sale.id) ? 'bg-green-100' : ''
-                    }`}
-                  >
+            <div className="w-1/2 max-sm:w-full flex flex-col gap-2 p-2 rounded-md max-h-[400px] overflow-y-auto">
+
+              {
+                isPending ? (<SkeletonDemo />) : (
+                  filteredSales.map((sale) => (
                     <div
-                      className="flex items-center gap-2"
-                      onClick={() => toggleSaleSelection(sale.id)}
+                      key={sale.id}
+                      className={`flex items-center justify-between p-2 rounded-md cursor-pointer ${selectedSalesIds.includes(sale.id) ? 'bg-green-100' : ''
+                        }`}
                     >
-                      <Checkbox checked={selectedSalesIds.includes(sale.id)} />
-                      <div>
-                        <div className="font-semibold">{sale.stockName}</div>
-                        <div className="text-sm text-muted-foreground">
-                          {new Date(sale.createdAt).toLocaleDateString()} — {sale.quantity} qty
+                      <div
+                        className="flex items-center gap-2"
+                        onClick={() => toggleSaleSelection(sale.id)}
+                      >
+                        <Checkbox checked={selectedSalesIds.includes(sale.id)} />
+                        <div>
+                          <div className="font-semibold">{sale.stockName}</div>
+                          <div className="text-sm text-muted-foreground">
+                            {new Date(sale.createdAt).toLocaleDateString()} — {sale.quantity} qty
+                          </div>
                         </div>
                       </div>
+    
+                      {/* Delete Button */}
+                      <Button
+                        variant="destructive"
+                        size="icon"
+                        onClick={() => deleteSale(sale.id)}
+                        disabled={isDeleting}
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
                     </div>
-                
-                    {/* Delete Button */}
-                    <Button
-                      variant="destructive"
-                      size="icon"
-                      onClick={() => deleteSale(sale.id)}
-                      disabled={isDeleting}
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </Button>
-                  </div>
-                ))}
-              
+                  ))
+                )
+              }
+
             </div>
 
             {/* Graph */}
@@ -113,34 +117,34 @@ const AttendanceReport = () => {
                 </div>
               ) : (
                 <ResponsiveContainer width="100%" height={300}>
-  <LineChart data={selectedSales}>
-    <CartesianGrid strokeDasharray="3 3" />
-    <XAxis
-      dataKey="createdAt"
-      tickFormatter={(str) => new Date(str).toLocaleDateString()}
-    />
-    <YAxis />
-    <Tooltip content={({ active, payload, label }) => {
-      if (active && payload && payload.length) {
-        const sale = payload[0].payload;
-        return (
-          <div className="bg-white p-2 rounded-md shadow-md text-sm">
-            <div><strong>Stock Name:</strong> {sale.stockName}</div>
-            <div><strong>Quantity:</strong> {sale.quantity}</div>
-            <div><strong>Date:</strong> {new Date(sale.createdAt).toLocaleDateString()}</div>
-          </div>
-        )
-      }
-      return null;
-    }} />
-    <Line
-      type="monotone"
-      dataKey="quantity"
-      stroke="#22c55e"
-      activeDot={{ r: 8 }}
-    />
-  </LineChart>
-</ResponsiveContainer>
+                  <LineChart data={selectedSales}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis
+                      dataKey="createdAt"
+                      tickFormatter={(str) => new Date(str).toLocaleDateString()}
+                    />
+                    <YAxis />
+                    <Tooltip content={({ active, payload, label }) => {
+                      if (active && payload && payload.length) {
+                        const sale = payload[0].payload;
+                        return (
+                          <div className="bg-white p-2 rounded-md shadow-md text-sm">
+                            <div><strong>Stock Name:</strong> {sale.stockName}</div>
+                            <div><strong>Quantity:</strong> {sale.quantity}</div>
+                            <div><strong>Date:</strong> {new Date(sale.createdAt).toLocaleDateString()}</div>
+                          </div>
+                        )
+                      }
+                      return null;
+                    }} />
+                    <Line
+                      type="monotone"
+                      dataKey="quantity"
+                      stroke="#22c55e"
+                      activeDot={{ r: 8 }}
+                    />
+                  </LineChart>
+                </ResponsiveContainer>
 
               )}
             </div>
