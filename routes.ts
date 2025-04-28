@@ -1,18 +1,16 @@
 
-
+// without user can access
 export const publicroutes = [
     "/",
-    "/auth/new-verification"
+    "/forgot-password",
+    "/new-password"
 ];
 
+
+// if login user wil navigate to the DEFAULT_LOGIN_REDIRECT
 export const authRoutes = [
     "/login",
-    "/auth/register",
-    "/auth/error",
-    "/auth/reset",
-    "/auth/new-password"
 ];
 
-export const apiAuthPrefix = "/api/auth";
 
-export const DEFAULT_LOGIN_REDIRECT = "/settings";
+export const DEFAULT_LOGIN_REDIRECT = "/";

@@ -24,6 +24,7 @@ import {
 } from "@/components/ui/sidebar"
 import { usePathname } from "next/navigation"
 import Link from "next/link";
+import { ClientUser } from "@/lib/client-user";
 
 // This is sample data.
 
@@ -132,7 +133,7 @@ const managerData = {
       items: [
         {
           title: "Add & View sales",
-          url: "/sales"
+          url: "/manager/sales"
         },
       ]
     }
@@ -168,11 +169,16 @@ const empData = {
   ]}
 
 
+
+
   // In Employee navbar data you have to remove dash board and add notice
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
   const pathname = usePathname();
+
+  const session = ClientUser()
+
 
   const data = useMemo(() => {
     return pathname.startsWith("/manager") ? managerData : pathname.startsWith("/employee") ? empData : defaultData;
@@ -190,6 +196,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
        <p className="text-sm -mt-2 italic">Metal Foldable Cages</p>
       </SidebarHeader>
       <SidebarContent className="gap-0">
+        {
+          session?.user?.role === "OWNER" &&
       <SidebarGroupContent>
         <SidebarMenuItem >
           <SidebarMenuButton isActive={pathname == "/dashboard" ? true : false}>
@@ -197,6 +205,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           </SidebarMenuButton>
         </SidebarMenuItem>
       </SidebarGroupContent>
+        }
         {/* We create a collapsible SidebarGroup for each parent. */}
         {data.navMain.map((item) => (
           <Collapsible

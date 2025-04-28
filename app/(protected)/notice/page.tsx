@@ -1,4 +1,4 @@
-'use client'
+// 'use client'
 
 import NoticeList from "@/components/blocks/NoticeList"
 import { SidebarInset } from "@/components/ui/sidebar"

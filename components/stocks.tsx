@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import StocksContainer from './stocks-container'
 import { useStockQuery } from '@/queries/useStockQuery'

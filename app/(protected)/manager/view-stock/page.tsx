@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 
 import { AddStockBtn } from "@/components/add-stock-btn";
 import Stocks from "@/components/stocks";
