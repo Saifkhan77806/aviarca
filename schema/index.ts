@@ -74,3 +74,11 @@ export const saleSchema = z.object({
   quantity: z.number().min(1,{message: "Sales quantity is required"})
 })
 
+export const noticeSchema = z.object({
+  subject: z.string().min(5, {message: "Notice subject is required"}),
+  description: z.string().min(10, {message: "Description is required"}),
+  role: z.enum(["EMPLOYEE", "MANAGER"],{
+    invalid_type_error: "Role is required it can be EMPLOYEE and  MANAGER"
+  })
+})
+

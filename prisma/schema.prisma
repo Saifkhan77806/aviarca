@@ -95,16 +95,6 @@ model Item {
   billId      String
 }
 
-// model Stock {
-//   id        String   @id @default(uuid())
-//   name      String
-//   mrp       Int
-//   cost      Int
-//   cage      String
-//   createdAt DateTime @default(now())
-//   quantity  Int
-// }
-
 model Stock {
   id        String   @id @default(uuid())
   name      String   @unique // <-- Make name unique
@@ -123,7 +113,7 @@ model Sales {
   quantity  Int
   createdAt DateTime @default(now())
   cost      Int
-  mrp Int
+  mrp       Int
 
   stock Stock @relation("StockSales", fields: [stockName], references: [name])
 }
