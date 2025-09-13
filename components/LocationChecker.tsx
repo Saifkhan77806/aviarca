@@ -27,7 +27,7 @@ interface CurrentLocation {
 }
 
 export function LocationChecker({ targetLat, targetLng }: LocationCheckerProps) {
-  const [currentLocation, setCurrentLocation] = useState<CurrentLocation | null>(null);
+  const [currentLocation, setCurrentLocation] = useState<CurrentLocation | null | undefined>(null);
   const [savedLocations, setSavedLocations] = useState<SavedLocation[]>([]);
   const [distance, setDistance] = useState<number | null>(null);
   const [status, setStatus] = useState<string>('');
@@ -36,13 +36,19 @@ export function LocationChecker({ targetLat, targetLng }: LocationCheckerProps) 
   const [inside, setInside] = useState<boolean>(false)
 
    const Clicked = () =>{
-      console.log("Clicked")
+    if(inside){
       giveAtt().then((res)=>{
         console.log(res)
         alert("Attendance sent successfully !")
       }).catch((err)=>{
         console.log(err)
       });
+    }else{
+      alert("You are not in the attendance zone !")
+      return
+    }
+
+      console.log("Clicked")
     }
   
 
@@ -125,6 +131,7 @@ export function LocationChecker({ targetLat, targetLng }: LocationCheckerProps) 
           setInside(true)
         } else {
           setStatus('outside');
+
         }
       },
       (error) => {

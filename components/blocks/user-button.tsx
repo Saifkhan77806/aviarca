@@ -11,24 +11,28 @@ import { LougoutButton } from "./LogoutBtn";
 
 export const UserButton =  () =>{
 
-    const user = ClientUser()
+    const session = ClientUser()
+    console.log(session?.user?.email)
 
     return (
         <>
        <DropdownMenu>
         <DropdownMenuTrigger>
             <Avatar>
-                <AvatarImage src={user?.id as string} />
+                <AvatarImage src={session?.user?.id as string} />
                 <AvatarFallback className="bg-sky-500">
                     <FaUser className="text-white" />
                     </AvatarFallback>
             </Avatar>
+            <p></p>
+                    
         </DropdownMenuTrigger>
         <DropdownMenuContent>
             <LougoutButton>
                 <DropdownMenuItem>
                     <LogOutIcon className="h-4 w-4 mr-2" />
-                    Logout
+                    log
+                    
                 </DropdownMenuItem>
                 </LougoutButton>
         </DropdownMenuContent>

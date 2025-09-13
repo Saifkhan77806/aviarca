@@ -12,11 +12,22 @@ export const giveAtt = async () =>{
 
     if(!userData) return {Error: "User not found"}
 
-    const month = new Date().getMonth()
-    const year = new Date().getFullYear()
-    const day = new Date().getDate()
+    const month = new Date().getMonth() + 1;
+    const year = new Date().getFullYear();
+    const day = new Date().getDate();
 
-    const data = await getAttendanceData(userData.id);
+    //  const data = await getAttendanceData(userData.id);
+
+    console.log({
+            userId: userData.id,
+            month,
+            year,
+            day,
+            status: "PRESENT"
+        })
+
+        
+
 
 
 

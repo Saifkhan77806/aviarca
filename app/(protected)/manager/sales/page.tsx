@@ -17,9 +17,6 @@ import { redirect } from 'next/navigation'
 const AttendanceReport = () => {
   const { data: sales = [], isPending } = useSaleQuery()
 
-  const session = ClientUser()
-
-  
   
   // if(session?.user.role !== "MANAGER"){
   //   const lRole = session?.user.role.toLowerCase() ;

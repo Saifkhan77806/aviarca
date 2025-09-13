@@ -4,6 +4,8 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { db } from '@/lib/db';
 import Link from 'next/link';
 import { getRmBill } from '@/data/bill';
+import { toast } from 'sonner';
+import { deleteBill } from '@/app/actions/delete-bill';
 
 export default function ViewRawMaterialBill() {
   const queryClient = useQueryClient();
@@ -16,15 +18,15 @@ export default function ViewRawMaterialBill() {
 
 
   const deleteMutation = useMutation({
-    mutationFn: async (id: string) => {
-      await db.bill.delete({ where: { id } });
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['rawMaterialBills'] });
+    mutationFn: (id: string) => deleteBill(id),
+    onSuccess: async () => {
+     await queryClient.invalidateQueries({ queryKey: ['rawMaterialBills'] });
+      toast.success('Bill deleted successfully');
     },
   });
 
   const handleDelete = (id: string) => {
+    console.log("first delete bill")
     deleteMutation.mutate(id);
   };
 

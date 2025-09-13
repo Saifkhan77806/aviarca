@@ -12,5 +12,14 @@ export const authRoutes = [
     "/login",
 ];
 
+export const ownPath = [
+    "/attendance",
+    "/dashboard",
+    "/new-emp",
+    "/notice",
+    "/order",
+    "/sales"
+]
+
 
 export const DEFAULT_LOGIN_REDIRECT = "/";

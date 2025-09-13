@@ -1,11 +1,12 @@
 import authConfig from "@/auth.config";
 import NextAuth from "next-auth";
-import { DEFAULT_LOGIN_REDIRECT, authRoutes, publicroutes } from "@/routes";
+import { DEFAULT_LOGIN_REDIRECT, authRoutes, ownPath, publicroutes } from "@/routes";
 import { getToken } from "next-auth/jwt";
 
 const { auth } = NextAuth(authConfig);
 
 export default auth(async (req) => {
+  
   const { nextUrl } = req;
   const isLoggedIn = !!req.auth;
   const session = await getToken({ req, secret: process.env.AUTH_SECRET });
@@ -32,6 +33,15 @@ export default auth(async (req) => {
   if (session) {
     const role = session.role;
 
+    if(role === "OWNER"){
+        const isOwnPath = ownPath.includes(pathname);
+        if(!isOwnPath){
+            return Response.redirect(new URL("/dashboard", nextUrl));
+        }
+
+
+    }
+
     if (role === "EMPLOYEE") {
       if (!pathname.startsWith("/employee")) {
         return Response.redirect(new URL("/employee", nextUrl));
@@ -40,10 +50,6 @@ export default auth(async (req) => {
       if (!pathname.startsWith("/manager")) {
         return Response.redirect(new URL("/manager", nextUrl));
       }
-    } else if (role === "OWNER") {
-    //   if (!pathname.startsWith("/owner")) {
-        return Response.redirect(new URL("/owner", nextUrl));
-    //   }
     }
   }
 
