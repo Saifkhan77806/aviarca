@@ -1,33 +1,44 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 import {
   AudioWaveform,
+  BadgeIndianRupee,
   BookOpen,
   Bot,
+  Calendar1,
   Command,
+  ContactRound,
+  Flag,
+  FolderOpenDot,
   Frame,
   GalleryVerticalEnd,
+  LayoutPanelLeft,
+  MailCheckIcon,
   Map,
   PieChart,
+  ReceiptIndianRupee,
+  ReceiptText,
   Settings2,
   SquareTerminal,
-} from "lucide-react"
+  StickyNote,
+  UserRoundCog,
+} from "lucide-react";
 
-import { NavMain } from "@/components/nav-main"
-import { NavProjects } from "@/components/nav-projects"
-import { NavUser } from "@/components/nav-user"
-import { TeamSwitcher } from "@/components/team-switcher"
+import { NavMain } from "@/components/nav-main";
+import { NavProjects } from "@/components/nav-projects";
+import { NavUser } from "@/components/nav-user";
+import { TeamSwitcher } from "@/components/team-switcher";
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
   SidebarRail,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
 
 // This is sample data.
-const data = {
+const data1 = {
   user: {
     name: "shadcn",
     email: "m@example.com",
@@ -52,6 +63,36 @@ const data = {
   ],
   navMain: [
     {
+      title: "Dashboard",
+      url: "/dashboard",
+      icon: LayoutPanelLeft,
+    },
+    {
+      title: "Notice",
+      url: "/notice",
+      icon: Flag,
+    },
+    {
+      title: "Task",
+      url: "/task",
+      icon: StickyNote,
+    },
+    {
+      title: "Salary",
+      url: "/salaryslip",
+      icon: BadgeIndianRupee,
+    },
+    {
+      title: "Attendance",
+      url: "/attendance",
+      icon: Calendar1,
+    },
+    {
+      title: "Setting",
+      url: "/setting",
+      icon: Settings2,
+    },
+    {
       title: "Playground",
       url: "#",
       icon: SquareTerminal,
@@ -67,71 +108,6 @@ const data = {
         },
         {
           title: "Settings",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Models",
-      url: "#",
-      icon: Bot,
-      items: [
-        {
-          title: "Genesis",
-          url: "#",
-        },
-        {
-          title: "Explorer",
-          url: "#",
-        },
-        {
-          title: "Quantum",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Documentation",
-      url: "#",
-      icon: BookOpen,
-      items: [
-        {
-          title: "Introduction",
-          url: "#",
-        },
-        {
-          title: "Get Started",
-          url: "#",
-        },
-        {
-          title: "Tutorials",
-          url: "#",
-        },
-        {
-          title: "Changelog",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Settings",
-      url: "#",
-      icon: Settings2,
-      items: [
-        {
-          title: "General",
-          url: "#",
-        },
-        {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
           url: "#",
         },
       ],
@@ -154,14 +130,300 @@ const data = {
       icon: Map,
     },
   ],
-}
+};
+
+const data2 = {
+  user: {
+    name: "shadcn",
+    email: "m@example.com",
+    avatar: "/avatars/shadcn.jpg",
+  },
+
+  navMain: [
+    {
+      title: "Dashboard",
+      url: "/dashboard",
+      icon: LayoutPanelLeft,
+    },
+    {
+      title: "Notice",
+      url: "/notice",
+      icon: Flag,
+    },
+    {
+      title: "Task",
+      url: "/task",
+      icon: StickyNote,
+    },
+    {
+      title: "Salary",
+      url: "/salaryslip",
+      icon: BadgeIndianRupee,
+    },
+    {
+      title: "Attendance",
+      url: "/attendance",
+      icon: Calendar1,
+    },
+    {
+      title: "Projects",
+      url: "/project-sections",
+      icon: FolderOpenDot,
+      items: [
+        {
+          title: "Project",
+          url: "/project",
+        },
+        {
+          title: "Assigned Project",
+          url: "/assigned-project",
+        },
+        {
+          title: "Project Payment",
+          url: "project-payment",
+        },
+      ],
+    },
+    {
+      title: "Edit Salary",
+      url: "/edit-emp-salary",
+      icon: ReceiptText,
+    },
+    {
+      title: "Billing",
+      url: "/billing",
+      icon: ReceiptIndianRupee,
+    },
+    {
+      title: "Meeting",
+      url: "/meeting",
+      icon: ContactRound,
+    },
+    {
+      title: "Employee Management",
+      url: "/emp-management",
+      icon: UserRoundCog,
+    },
+    {
+      title: "Setting",
+      url: "/setting",
+      icon: Settings2,
+    },
+  ],
+  projects: [
+    {
+      name: "Design Engineering",
+      url: "#",
+      icon: Frame,
+    },
+    {
+      name: "Sales & Marketing",
+      url: "#",
+      icon: PieChart,
+    },
+    {
+      name: "Travel",
+      url: "#",
+      icon: Map,
+    },
+  ],
+};
+
+const data3 = {
+  user: {
+    name: "shadcn",
+    email: "m@example.com",
+    avatar: "/avatars/shadcn.jpg",
+  },
+  navMain: [
+    {
+      title: "Dashboard",
+      url: "/dashboard",
+      icon: LayoutPanelLeft,
+    },
+    {
+      title: "Notice",
+      url: "/notice",
+      icon: Flag,
+    },
+    {
+      title: "Task",
+      url: "/task",
+      icon: StickyNote,
+    },
+    {
+      title: "Salary",
+      url: "/salaryslip",
+      icon: BadgeIndianRupee,
+    },
+    {
+      title: "Attendance",
+      url: "/attendance",
+      icon: Calendar1,
+    },
+    {
+      title: "Projects",
+      url: "/project-sections",
+      icon: FolderOpenDot,
+      items: [
+        {
+          title: "Project",
+          url: "/project",
+        },
+        {
+          title: "Assigned Project",
+          url: "/assigned-project",
+        },
+        {
+          title: "Project Payment",
+          url: "project-payment",
+        },
+      ],
+    },
+    {
+      title: "Edit Salary",
+      url: "/edit-salary",
+      icon: ReceiptText,
+    },
+    {
+      title: "Billing",
+      url: "/billing",
+      icon: ReceiptIndianRupee,
+    },
+    {
+      title: "Meeting",
+      url: "/meeting",
+      icon: ContactRound,
+    },
+    {
+      title: "Manager",
+      url: "/user-management",
+      icon: UserRoundCog,
+    },
+    {
+      title: "Setting",
+      url: "/setting",
+      icon: Settings2,
+    },
+  ],
+  projects: [
+    {
+      name: "Design Engineering",
+      url: "#",
+      icon: Frame,
+    },
+    {
+      name: "Sales & Marketing",
+      url: "#",
+      icon: PieChart,
+    },
+    {
+      name: "Travel",
+      url: "#",
+      icon: Map,
+    },
+  ],
+};
+
+const data = {
+  user: {
+    name: "shadcn",
+    email: "m@example.com",
+    avatar: "/avatars/shadcn.jpg",
+  },
+  navMain: [
+    {
+      title: "Dashboard",
+      url: "/dashboard",
+      icon: LayoutPanelLeft,
+    },
+    {
+      title: "Notice",
+      url: "/notice",
+      icon: Flag,
+    },
+    {
+      title: "Salary",
+      url: "/salaryslip",
+      icon: BadgeIndianRupee,
+    },
+    {
+      title: "Attendance",
+      url: "/attendance",
+      icon: Calendar1,
+    },
+    {
+      title: "Projects",
+      url: "/project-sections",
+      icon: FolderOpenDot,
+      items: [
+        {
+          title: "Project",
+          url: "/project",
+        },
+        {
+          title: "Assigned Project",
+          url: "/assigned-project",
+        },
+        {
+          title: "Project Payment",
+          url: "project-payment",
+        },
+      ],
+    },
+    {
+      title: "Edit Salary",
+      url: "/edit-salary",
+      icon: ReceiptText,
+    },
+    {
+      title: "Billing",
+      url: "/billing",
+      icon: ReceiptIndianRupee,
+    },
+    {
+      title: "Mail Box",
+      url: "/mailbox",
+      icon: MailCheckIcon,
+    },
+    {
+      title: "Meeting",
+      url: "/meeting",
+      icon: ContactRound,
+    },
+    {
+      title: "Manager",
+      url: "/user-management",
+      icon: UserRoundCog,
+    },
+    {
+      title: "Setting",
+      url: "/setting",
+      icon: Settings2,
+    },
+  ],
+  projects: [
+    {
+      name: "Design Engineering",
+      url: "#",
+      icon: Frame,
+    },
+    {
+      name: "Sales & Marketing",
+      url: "#",
+      icon: PieChart,
+    },
+    {
+      name: "Travel",
+      url: "#",
+      icon: Map,
+    },
+  ],
+};
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="icon" {...props}>
-      <SidebarHeader>
-        <TeamSwitcher teams={data.teams} />
-      </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
         <NavProjects projects={data.projects} />
@@ -171,5 +433,5 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>
-  )
+  );
 }
