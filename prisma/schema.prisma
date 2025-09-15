@@ -23,6 +23,7 @@ enum UserRole {
   EMPLOYEE
   MANAGER
   OWNER
+  ADMIN
 }
 
 enum Role {
